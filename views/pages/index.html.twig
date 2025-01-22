@@ -7,7 +7,7 @@
 {% block title %}
 	{# double {{}} = variable #}
 	<p>Page d'accueil Bienvenue ,
-		{{user.firstname}}</p>
+		{{user.firstName}}</p>
 {% endblock %}
 
 {% block main %}
@@ -41,6 +41,7 @@
 			{% for book in books %}
 				<div>
 					<h3>{{book.title}}</h3>
+					
 				</div>
 				<div>
 					<h3>{{book.author}}</h3>

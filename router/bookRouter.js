@@ -23,4 +23,18 @@ bookRouter.post("/addBook", authguard, async (req, res) => {
 
 })
 
+bookRouter.get("/deleteBook:/id", authguard, async (req, res) => {
+    try {
+        const deleteBook = await prisma.book.delete({
+            where: {
+                id: parseInt{req.params.id}
+            }
+        })
+        
+    } catch (error) {
+        res.render("/pages/index.html/twig", {error: error})
+    }
+})
+
+bookRouter.get("/editBook/id")
 module.exports = bookRouter;

@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 
+
 const bcrypt = require("bcrypt");
 
 const hashPasswordExtension = require('../services/extensions/hashPasswordExtension');
@@ -8,7 +9,7 @@ const authguard = require('../services/authguard');
 
 const userRouter = require('express').Router();
 
-const prisma = new PrismaClient().$extends(hashPasswordExtension)
+const prisma = new PrismaClient({log: ['query', 'info', 'warn', 'error']}).$extends(hashPasswordExtension)
 
 userRouter.get('/register', (req, res) => {
     // Chemin à partir du dossier views
@@ -45,6 +46,10 @@ userRouter.get('/login', (req, res) => {
     res.render('pages/login.html.twig', { title: "connexion" });
 })
 
+userRouter.get('/logout', (req,res) => {
+    req.session.destroy();
+    res.redirect('/login');
+})
 
 
 userRouter.post('/login', async (req, res) => {
