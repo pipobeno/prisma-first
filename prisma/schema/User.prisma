@@ -5,5 +5,4 @@ model User {
   mail String @unique
   password String
   books Book[]
-  
 }

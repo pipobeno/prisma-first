@@ -12,41 +12,100 @@
 
 {% block main %}
 	<main>
-		<section>
-			<div>
-				<h2>Formulaire d'inscription</h2>
-			</div>
-			<div>
-				<form action="/addBook" method="post">
-					<div>
-						<label for="title">Titre du livre</label>
-						<input id="title" type="text" name="title">
-					</div>
-					<div>
-						<label for="author">Auteur du livre</label>
-						<input id="author" type="text" name="author">
-					</div>
-				</div>
-				<div>
-					<button type="submit">Envoyer</button>
-				</div>
-			</form>
-		</div>
-	</section>
+		 <section>
+            <div>
+                {% if book %}
+                    <h2 id="yolo">Modification de {{book.title}}</h2>
+                {% else %}
+                    <h2>Ajout d'un livre</h2>
+                {% endif %}
+            <div>
+            
+            </div>
+            
+                <form {% if book %} action="/editBook/{{book.id}}" {% else %} action="/addBook" {% endif %} method="post">
+                    <div>
+                        <label for="title">Titre du livre</label>
+                        <input id="title" type="text" name="title" value="{% if book %}{{book.title}}{% endif %}"> 
+                    </div>
+                    <div>
+                        <label for="author">Auteur du livre</label>
+                        <input id="author" type="text" name="author" value="{% if book %}{{book.author}}{% endif %}"> 
+                    </div>
+                    <div>
+                        <button type="submit">{% if book %}Modifier{% else %}Ajouter{% endif %}</button>
+                    </div>
+                </form>
+            </div>
+        </section>
 	{% if books|length > 0 %}
+            <section>
+                <h2>Liste des livres</h2>
+                {% for book in books %}
+                    <div>
+                        <h3>{{ book.title }}</h3>
+                        <p>{{ book.author }}</p>
+                        <a href="/editBook/{{book.id}}">Edit</a>
+                        <a href="/deleteBook/{{book.id}}">X</a>
+                    </div>
+                {% endfor %}
+            </section>
+        {% endif %}
+    </main>
+{% endblock %}
+{# 
 
-		<section>
+{% extends "../layouts/base.html.twig" %}
 
-			<h2>Liste des livres</h2>
-			{% for book in books %}
-				<div>
-					<h3>{{book.title}}</h3>
-					
-				</div>
-				<div>
-					<h3>{{book.author}}</h3>
-				</div>
-			{% endfor %}
-		{% endif %}
-	</section>
-</main>{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="/assets/css/register.css">
+{% endblock %}
+
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block main %}
+    <main>
+        <p>Bienvenue sur la page d'accueil, {{ user.firstName }} !</p>
+        <section>
+            <div>
+                {% if book %}
+                    <h2 id="yolo">Modification de {{book.title}}</h2>
+                {% else %}
+                    <h2>Ajout d'un livre</h2>
+                {% endif %}
+            <div>
+            
+            </div>
+            
+                <form {% if book %} action="/editBook/{{book.id}}" {% else %} action="/addBook" {% endif %} method="post">
+                    <div>
+                        <label for="title">Titre du livre</label>
+                        <input id="title" type="text" name="title" value="{% if book %}{{book.title}}{% endif %}"> 
+                    </div>
+                    <div>
+                        <label for="author">Auteur du livre</label>
+                        <input id="author" type="text" name="author" value="{% if book %}{{book.author}}{% endif %}"> 
+                    </div>
+                    <div>
+                        <button type="submit">{% if book %}Modifier{% else %}Ajouter{% endif %}</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        {% if books|length > 0 %}
+            <section>
+                <h2>Liste des livres</h2>
+                {% for book in books %}
+                    <div>
+                        <h3>{{ book.title }}</h3>
+                        <p>{{ book.author }}</p>
+                        <a href="/editBook/{{book.id}}">Edit</a>
+                        <a href="/deleteBook/{{book.id}}">X</a>
+                    </div>
+                {% endfor %}
+            </section>
+        {% endif %}
+    </main>
+{% endblock %} #}
