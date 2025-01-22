@@ -1,0 +1,41 @@
+{% extends "../layouts/base.html.twig" %}
+
+{% block style %}
+    <link rel="stylesheet" href="/assets/css/subscribe.css">
+{% endblock %}
+
+{% block title %}
+{# double {{}} = variable #}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block main %}
+<main>
+    <section>
+        <div>
+            <h2>Formulaire de connexion</h2>
+        </div>
+        <div>
+            <form action="./login" method="post">
+                <div>
+                    <label for="mail">Votre E-mail</label>
+                    <input id="mail" type="text" name="mail">
+                    {% if error.mail %}
+                    <p>{{error.mail}}</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <label for="password">Votre mot de passe</label>
+                    <input id="password" type="password" name="password">
+                    {% if error.password %}
+                    <p>{{error.password}}</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <button type="submit">Envoyer</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+{% endblock %}

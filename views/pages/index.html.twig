@@ -1,0 +1,51 @@
+{% extends "../layouts/base.html.twig" %}
+
+{% block style %}
+	<link rel="stylesheet" href="/assets/css/subscribe.css">
+{% endblock %}
+
+{% block title %}
+	{# double {{}} = variable #}
+	<p>Page d'accueil Bienvenue ,
+		{{user.firstname}}</p>
+{% endblock %}
+
+{% block main %}
+	<main>
+		<section>
+			<div>
+				<h2>Formulaire d'inscription</h2>
+			</div>
+			<div>
+				<form action="/addBook" method="post">
+					<div>
+						<label for="title">Titre du livre</label>
+						<input id="title" type="text" name="title">
+					</div>
+					<div>
+						<label for="author">Auteur du livre</label>
+						<input id="author" type="text" name="author">
+					</div>
+				</div>
+				<div>
+					<button type="submit">Envoyer</button>
+				</div>
+			</form>
+		</div>
+	</section>
+	{% if books|length > 0 %}
+
+		<section>
+
+			<h2>Liste des livres</h2>
+			{% for book in books %}
+				<div>
+					<h3>{{book.title}}</h3>
+				</div>
+				<div>
+					<h3>{{book.author}}</h3>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</section>
+</main>{% endblock %}
