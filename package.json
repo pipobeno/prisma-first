@@ -12,7 +12,7 @@
     "bcrypt": "^5.1.1",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
-    "prisma": "^6.2.1",
+    "prisma": "^6.3.1",
     "twig": "^1.17.1"
   },
   "description": ""
